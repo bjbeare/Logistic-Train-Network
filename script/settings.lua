@@ -16,6 +16,7 @@ depot_inactivity = settings.global["ltn-dispatcher-depot-inactivity(s)"].value *
 stop_timeout = settings.global["ltn-dispatcher-stop-timeout(s)"].value * 60
 condition_stop_timeout = {type = "time", compare_type = "or", ticks = stop_timeout }
 delivery_timeout = settings.global["ltn-dispatcher-delivery-timeout(s)"].value * 60
+finish_unloading = settings.global["ltn-dispatcher-finish-unloading"].value
 finish_loading = settings.global["ltn-dispatcher-finish-loading"].value
 requester_delivery_reset = settings.global["ltn-dispatcher-requester-delivery-reset"].value
 dispatcher_enabled = settings.global["ltn-dispatcher-enabled"].value
@@ -62,6 +63,9 @@ script.on_event(defines.events.on_runtime_mod_setting_changed, function(event)
   end
   if event.setting == "ltn-dispatcher-delivery-timeout(s)" then
     delivery_timeout = settings.global["ltn-dispatcher-delivery-timeout(s)"].value * 60
+  end
+  if event.setting == "ltn-dispatcher-finish-unloading" then
+    finish_unloading = settings.global["ltn-dispatcher-finish-unloading"].value
   end
   if event.setting == "ltn-dispatcher-finish-loading" then
     finish_loading = settings.global["ltn-dispatcher-finish-loading"].value

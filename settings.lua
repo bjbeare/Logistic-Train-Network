@@ -129,6 +129,13 @@ data:extend({
   },
   {
     type = "bool-setting",
+    name = "ltn-dispatcher-finish-unloading",
+    order = "cf",
+    setting_type = "runtime-global",
+    default_value = true
+  },
+  {
+    type = "bool-setting",
     name = "ltn-dispatcher-finish-loading",
     order = "cf",
     setting_type = "runtime-global",

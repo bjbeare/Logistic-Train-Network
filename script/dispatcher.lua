@@ -235,11 +235,14 @@ function NewScheduleRecord(stationName, condType, condComp, itemlist, countOverr
       -- itemlist = {first_signal.type, first_signal.name, constant}
       local cond = {comparator = condComp, first_signal = {type = itemlist[i].type, name = itemlist[i].name}, constant = countOverride or itemlist[i].count}
       record.wait_conditions[#record.wait_conditions+1] = {type = condFluid or condType, compare_type = "and", condition = cond }
+      if finish_unloading and condComp == "=" and countOverride == 0 then
+        record.wait_conditions[#record.wait_conditions+1] = condition_finish_loading
+      end
     end
 
     if waitEmpty then
       record.wait_conditions[#record.wait_conditions+1] = condition_wait_empty
-    elseif finish_loading then -- let inserter/pumps finish
+    elseif finish_loading and not (condComp == "=" and countOverride == 0) then
       record.wait_conditions[#record.wait_conditions+1] = condition_finish_loading
     end
 
